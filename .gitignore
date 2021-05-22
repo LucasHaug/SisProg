@@ -1,2 +1,2 @@
-# Environments
-venv/
+# Build files
+build/*
