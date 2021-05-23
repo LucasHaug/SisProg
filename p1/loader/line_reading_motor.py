@@ -26,6 +26,7 @@ class LineReadingMotor(EventsMotor):
     def activate(self) -> None:
         super().activate()
 
+        self.read_data = []
         self.line_count = 0
         self.data_count = 0
 
