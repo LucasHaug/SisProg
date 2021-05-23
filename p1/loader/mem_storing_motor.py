@@ -51,7 +51,6 @@ class MemStoringMotor(EventsMotor):
     def activate(self):
         super().activate()
 
-        self.memory_pointer = None
         self.memory_position = 0
 
 
