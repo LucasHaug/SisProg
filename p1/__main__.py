@@ -7,17 +7,13 @@ def main():
     line_motor = LineMotor()
 
     reading_motor.set_line_motor(line_motor)
+    line_motor.set_reading_motor(reading_motor)
 
     reading_motor.add_event(FileEvent("open_file"))
 
-    reading_motor.run()
-
-    reading_motor.add_event(FileEvent("read"))
-    reading_motor.add_event(FileEvent("read"))
-    reading_motor.add_event(FileEvent("close_file"))
-
-    while reading_motor.run():
-        print("Running..")
+    while reading_motor.is_active():
+        reading_motor.run()
+        line_motor.run()
 
 
 if __name__ == '__main__':
