@@ -16,6 +16,8 @@ class EventsMotor(ABC):
     def activate(self):
         self.active = True
 
+        self.events_queue = []
+
 
     def deactivate(self):
         self.active = False
