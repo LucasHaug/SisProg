@@ -71,14 +71,18 @@ class FileWritingMotor(EventsMotor):
 
                 self.add_event(next_event)
 
-        # next_event = MemReadingEvent("read")
+        next_event = MemReadingEvent("read")
 
-        # self.mem_reading_motor.add_event(next_event)
+        self.mem_reading_motor.add_event(next_event)
 
 
     def _close_file(self, event: LineWritingEvent) -> None:
-        encoded_data = self._encode("")
-        self.file.write(encoded_data)
+        # Write pending data
+        for i in range(event.line_size):
+            encoded_data = self._encode(event.line_data[i])
+
+            if encoded_data is not None:
+                self.file.write(encoded_data)
 
         self.file.close()
 
