@@ -69,6 +69,10 @@ class FileReadingMotor(EventsMotor):
             next_event = DataReadingEvent(decoded_data)
 
             self.line_reading_motor.add_event(next_event)
+        else:
+            next_event = FileReadingEvent("error")
+
+            self.add_event(next_event)
 
 
     def _close_file(self, event: FileReadingEvent) -> None:
@@ -89,8 +93,4 @@ class FileReadingMotor(EventsMotor):
         if read_byte in self.decoding_table:
             return self.decoding_table[read_byte]
         else:
-            next_event = FileReadingEvent("error")
-
-            self.add_event(next_event)
-
             return None
