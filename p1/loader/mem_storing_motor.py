@@ -1,5 +1,5 @@
 from ..events_motor import EventsMotor
-from .events import FileEvent, LineEvent
+from .events import FileReadingEvent, LineReadingEvent
 
 ADDRESS_SIZE = 3
 DATA_SIZE = 2
@@ -8,7 +8,7 @@ NUM_OF_DATA_PER_LINE = 16
 NUM_OF_SPACES_SEPARATORS = 15
 MAX_BYTES = NUM_OF_DATA_PER_LINE * DATA_SIZE + NUM_OF_SPACES_SEPARATORS
 
-class StoringMotor(EventsMotor):
+class MemStoringMotor(EventsMotor):
     def __init__(self) -> None:
         super().__init__()
 
@@ -40,8 +40,8 @@ class StoringMotor(EventsMotor):
         }
 
 
-    def set_reading_motor(self, reading_motor) -> None:
-        self.reading_motor = reading_motor
+    def set_file_reading_motor(self, file_reading_motor) -> None:
+        self.file_reading_motor = file_reading_motor
 
 
     def set_memory_pointer(self, memory_pointer) -> None:
@@ -55,7 +55,7 @@ class StoringMotor(EventsMotor):
         self.memory_position = 0
 
 
-    def categorize_event(self, event: LineEvent) -> str:
+    def categorize_event(self, event: LineReadingEvent) -> str:
         if event.line_number == 0:
             if event.line_size != ADDRESS_SIZE:
                 return "invalid_line"
@@ -70,18 +70,18 @@ class StoringMotor(EventsMotor):
 
 
 
-    def _initial_line(self, event: LineEvent):
+    def _initial_line(self, event: LineReadingEvent):
         data = event.line_data
         decoded_data = self._decode(data, ADDRESS_SIZE)
 
         self.memory_position = decoded_data
 
-        next_event = FileEvent("read")
+        next_event = FileReadingEvent("read")
 
-        self.reading_motor.add_event(next_event)
+        self.file_reading_motor.add_event(next_event)
 
 
-    def _middle_line(self, event: LineEvent):
+    def _middle_line(self, event: LineReadingEvent):
         line_data = event.line_data
 
         data = []
@@ -98,31 +98,31 @@ class StoringMotor(EventsMotor):
                     self.memory_position += 1
                 else:
                     # Send ivalid line event
-                    next_event = LineEvent(-1, [], MAX_BYTES + 1)
+                    next_event = LineReadingEvent(-1, [], MAX_BYTES + 1)
 
                     self.add_event(next_event)
             else:
                 data.append(line_data[i])
 
-        next_event = FileEvent("read")
+        next_event = FileReadingEvent("read")
 
-        self.reading_motor.add_event(next_event)
+        self.file_reading_motor.add_event(next_event)
 
 
-    def _last_line(self, event: LineEvent):
+    def _last_line(self, event: LineReadingEvent):
         print("[INFO] Finished loading")
 
-        next_event = FileEvent("close_file")
+        next_event = FileReadingEvent("close_file")
 
-        self.reading_motor.add_event(next_event)
+        self.file_reading_motor.add_event(next_event)
 
 
-    def _invalid_line(self, event: LineEvent):
+    def _invalid_line(self, event: LineReadingEvent):
         print("[ERROR] Make sure to follow the input file specification")
 
-        next_event = FileEvent("close_file")
+        next_event = FileReadingEvent("close_file")
 
-        self.reading_motor.add_event(next_event)
+        self.file_reading_motor.add_event(next_event)
 
 
     def _decode(self, data, data_size):

@@ -1,34 +1,34 @@
 import numpy as np
 
-from .loader.reading_motor import ReadingMotor
-from .loader.line_motor import LineMotor
-from .loader.storing_motor import StoringMotor
-from .loader.events import FileEvent
+from .loader.file_reading_motor import FileReadingMotor
+from .loader.line_reading_motor import LineReadingMotor
+from .loader.mem_storing_motor import MemStoringMotor
+from .loader.events import FileReadingEvent
 
 def main():
-    reading_motor = ReadingMotor()
-    line_motor = LineMotor()
-    storing_motor = StoringMotor()
+    file_reading_motor = FileReadingMotor()
+    line_reading_motor = LineReadingMotor()
+    mem_storing_motor = MemStoringMotor()
 
     memory = np.zeros(4096, dtype=np.uint8)
 
-    reading_motor.set_file_name("mem.txt")
+    file_reading_motor.set_file_name("mem.txt")
 
-    reading_motor.set_line_motor(line_motor)
+    file_reading_motor.set_line_reading_motor(line_reading_motor)
 
-    line_motor.set_reading_motor(reading_motor)
-    line_motor.set_storing_motor(storing_motor)
+    line_reading_motor.set_file_reading_motor(file_reading_motor)
+    line_reading_motor.set_mem_storing_motor(mem_storing_motor)
 
-    storing_motor.set_reading_motor(reading_motor)
-    storing_motor.set_memory_pointer(memory)
+    mem_storing_motor.set_file_reading_motor(file_reading_motor)
+    mem_storing_motor.set_memory_pointer(memory)
 
-    reading_motor.add_event(FileEvent("open_file"))
+    file_reading_motor.add_event(FileReadingEvent("open_file"))
 
     try:
-        while reading_motor.is_active():
-            reading_motor.run()
-            line_motor.run()
-            storing_motor.run()
+        while file_reading_motor.is_active():
+            file_reading_motor.run()
+            line_reading_motor.run()
+            mem_storing_motor.run()
 
         np.savetxt("image.txt", memory, fmt='%x')
     except KeyboardInterrupt:

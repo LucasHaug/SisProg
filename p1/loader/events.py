@@ -1,8 +1,8 @@
 from ..event import Event
 
-class FileEvent(Event):
+class FileReadingEvent(Event):
     """
-    Event type handled by the ReadingMotor
+    Event type handled by the FileReadingMotor
     """
 
     def __init__(self, event_type) -> None:
@@ -10,9 +10,9 @@ class FileEvent(Event):
 
         self.type = event_type
 
-class DataEvent(Event):
+class DataReadingEvent(Event):
     """
-    Event type handled by the LineMotor
+    Event type handled by the LineReadingMotor
     """
 
     def __init__(self, event_data) -> None:
@@ -21,9 +21,9 @@ class DataEvent(Event):
         self.data = event_data
 
 
-class LineEvent(Event):
+class LineReadingEvent(Event):
     """
-    Event type handled by the StoringMotor
+    Event type handled by the MemStoringMotor
     """
 
     def __init__(self, line_number, line_data, line_size) -> None:
