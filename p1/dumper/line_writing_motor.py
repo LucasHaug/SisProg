@@ -87,7 +87,7 @@ class LineWritingMotor(EventsMotor):
 
     def _end(self, event : DataWritingEvent) -> None:
         if len(self.read_data) != 0:
-            self.read_data.append("\n")
+            self.read_data[-1] = "\n"
 
         self.read_data.append("")
 

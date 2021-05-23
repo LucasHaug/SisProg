@@ -98,7 +98,7 @@ class MemReadingMotor(EventsMotor):
     def _encode(self, data, data_size):
         decoded_data = []
 
-        for i in range(data_size):
+        for i in reversed(range(data_size)):
             partial_data = data >> (4 * i)
             partial_data &= 0xF
 
