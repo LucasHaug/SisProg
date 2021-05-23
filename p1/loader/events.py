@@ -19,3 +19,16 @@ class DataEvent(Event):
         super().__init__()
 
         self.data = event_data
+
+
+class LineEvent(Event):
+    """
+    Event type handled by the StoringMotor
+    """
+
+    def __init__(self, line_number, line_data, line_size) -> None:
+        super().__init__()
+
+        self.line_number = line_number
+        self.line_data = line_data
+        self.line_size = line_size
