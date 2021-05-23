@@ -11,6 +11,7 @@ class ReadingMotor(EventsMotor):
         self.reactions_table["error"] = self._error
 
         self.decoding_table = {
+            b'': "",
             b'\x0A': "\n",
             b'\x20': " ",
             b'\x30': "0",

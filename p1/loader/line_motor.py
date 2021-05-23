@@ -7,6 +7,7 @@ class LineMotor(EventsMotor):
 
         self.reactions_table["data"] = self._save_data
         self.reactions_table["line"] = self._read_line
+        self.reactions_table["file_end"] = self._file_end
 
         self.read_data = []
 
@@ -32,6 +33,8 @@ class LineMotor(EventsMotor):
     def categorize_event(self, event: DataEvent) -> str:
         if event.data == "\n":
             return "line"
+        elif event.data == "":
+            return "file_end"
         else:
             return "data"
 
@@ -51,5 +54,11 @@ class LineMotor(EventsMotor):
         self.line_count += 1
         self.data_count = 0
         self.read_data = []
+
+        self.storing_motor.add_event(next_event)
+
+    def _file_end(self, event : DataEvent) -> None:
+        # Add end line event
+        next_event = LineEvent(-1, [], 0)
 
         self.storing_motor.add_event(next_event)
