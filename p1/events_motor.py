@@ -1,9 +1,5 @@
 from abc import ABC, abstractmethod
-
-class Event():
-    def __init__(self) -> None:
-        pass
-
+from .event import Event
 
 class EventsMotor(ABC):
     def __init__(self) -> None:
