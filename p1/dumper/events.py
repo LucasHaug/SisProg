@@ -11,6 +11,19 @@ class MemReadingEvent(Event):
         self.type = event_type
 
 
+class DataWritingEvent(Event):
+    """
+    Event type handled by the LineWritingMotor
+    """
+
+    def __init__(self, event_type, data, data_size) -> None:
+        super().__init__()
+
+        self.type = event_type
+        self.data = data
+        self.data_size = data_size
+
+
 class LineWritingEvent(Event):
     """
     Event type handled by the FileWritingMotor
