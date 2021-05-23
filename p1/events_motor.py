@@ -10,6 +10,20 @@ class EventsMotor(ABC):
             "unknown": None
         }
 
+        self.active = True
+
+
+    def activate(self):
+        self.active = True
+
+
+    def deactivate(self):
+        self.active = False
+
+
+    def is_active(self):
+        return self.active
+
 
     def add_event(self, event : Event) -> None:
         self.events_queue.append(event)
