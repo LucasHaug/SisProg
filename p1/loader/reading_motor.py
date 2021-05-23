@@ -77,7 +77,9 @@ class ReadingMotor(EventsMotor):
     def _error(self, event) -> None:
         print("[ERROR] Incorrect file content")
 
-        self.deactivate()
+        next_event = FileEvent("close_file")
+
+        self.add_event(next_event)
 
 
     def _decode(self, read_byte):
