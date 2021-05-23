@@ -4,12 +4,12 @@ import pathlib
 sys.path.append(str(pathlib.Path(__file__).parent.parent.parent.absolute()))
 
 import numpy as np
-from ..dumper.dumper import Dumper
+from p1.dumper.dumper import Dumper
 
 def main():
     dumper = Dumper()
 
-    memory = np.loadtxt("image.txt", dtype=np.uint8)
+    # Note: image.txt must have just integers
 
     try:
         dumper.run("dump.txt", memory, 0x010, 0x037)
