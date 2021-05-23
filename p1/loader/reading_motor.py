@@ -2,15 +2,13 @@ from ..events_motor import EventsMotor
 from .events import FileEvent, DataEvent
 
 class ReadingMotor(EventsMotor):
-    def __init__(self, file_name) -> None:
+    def __init__(self) -> None:
         super().__init__()
 
         self.reactions_table["open_file"] = self._open_file
         self.reactions_table["read"] = self._read
         self.reactions_table["close_file"] = self._close_file
         self.reactions_table["error"] = self._error
-
-        self.file_name = file_name
 
         self.decoding_table = {
             b'\x0A': "\n",
@@ -32,6 +30,10 @@ class ReadingMotor(EventsMotor):
             b'\x45': "E",
             b'\x46': "F"
         }
+
+
+    def set_file_name(self, file_name):
+        self.file_name = file_name
 
 
     def set_line_motor(self, line_motor) -> None:
