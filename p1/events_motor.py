@@ -25,7 +25,7 @@ class EventsMotor(ABC):
         return self.active
 
 
-    def add_event(self, event : Event) -> None:
+    def add_event(self, event: Event) -> None:
         self.events_queue.append(event)
 
 
@@ -41,11 +41,11 @@ class EventsMotor(ABC):
 
 
     @abstractmethod
-    def categorize_event(self, event : Event) -> str:
+    def categorize_event(self, event: Event) -> str:
         pass
 
 
-    def react_to_event(self, event_type : str, event : Event) -> None:
+    def react_to_event(self, event_type: str, event: Event) -> None:
         self.reactions_table[event_type](event)
 
 

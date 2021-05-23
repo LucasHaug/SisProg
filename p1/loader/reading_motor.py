@@ -51,7 +51,7 @@ class ReadingMotor(EventsMotor):
             return "error"
 
 
-    def _open_file(self, event) -> None:
+    def _open_file(self, event: FileEvent) -> None:
         self.file = open(self.file_name, 'rb')
 
         next_event = FileEvent("read")
@@ -59,7 +59,7 @@ class ReadingMotor(EventsMotor):
         self.add_event(next_event)
 
 
-    def _read(self, event) -> None:
+    def _read(self, event: FileEvent) -> None:
         data = self.file.read(1)
 
         decoded_data = self._decode(data)
@@ -70,13 +70,13 @@ class ReadingMotor(EventsMotor):
             self.line_motor.add_event(next_event)
 
 
-    def _close_file(self, event) -> None:
+    def _close_file(self, event: FileEvent) -> None:
         self.file.close()
 
         self.deactivate()
 
 
-    def _error(self, event) -> None:
+    def _error(self, event: FileEvent) -> None:
         print("[ERROR] Incorrect file content")
 
         next_event = FileEvent("close_file")
