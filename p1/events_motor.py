@@ -1,4 +1,5 @@
 from abc import ABC, abstractmethod
+from typing import Tuple
 from .event import Event
 
 class EventsMotor(ABC):
@@ -14,13 +15,15 @@ class EventsMotor(ABC):
         self.events_queue.append(event)
 
 
-    def extract_event(self, event : Event) -> bool:
-        if not self.events_queue:
-            return False
+    def extract_event(self) -> Tuple[bool, Event]:
+        empty_queue = not self.events_queue
+
+        if empty_queue:
+            event = None
         else:
             event = self.events_queue.pop(0)
 
-            return True
+        return (not empty_queue, event)
 
 
     @abstractmethod
@@ -32,10 +35,16 @@ class EventsMotor(ABC):
         self.reactions_table[event_type](event)
 
 
-    def run(self) -> None:
-        event = Event()
+    def run(self) -> bool:
+        has_pending_event, event = self.extract_event()
 
-        if self.extract_event(event):
+        if has_pending_event:
             event_type = self.categorize_event(event)
 
             self.react_to_event(event_type, event)
+
+            return True
+        else:
+            print("[INFO] No avaible events")
+
+            return False
