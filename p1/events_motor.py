@@ -61,6 +61,4 @@ class EventsMotor(ABC):
 
             return True
         else:
-            print("[INFO] No avaible events")
-
             return False
