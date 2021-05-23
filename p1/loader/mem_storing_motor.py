@@ -68,7 +68,6 @@ class MemStoringMotor(EventsMotor):
             return "middle_line"
 
 
-
     def _initial_line(self, event: LineReadingEvent):
         data = event.line_data
         decoded_data = self._decode(data, ADDRESS_SIZE)
@@ -82,10 +81,15 @@ class MemStoringMotor(EventsMotor):
 
     def _middle_line(self, event: LineReadingEvent):
         line_data = event.line_data
+        line_size = event.line_size
+
+        # Needed for data padronization
+        line_data.append(" ")
+        line_size += 1
 
         data = []
 
-        for i in range(event.line_size):
+        for i in range(line_size):
             if line_data[i] == " ":
                 if len(data) == DATA_SIZE:
                     decoded_data = self._decode(data, DATA_SIZE)
