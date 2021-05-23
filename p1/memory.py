@@ -9,6 +9,10 @@ class Memory():
         return self.array[index]
 
 
+    def __setitem__(self, index, value):
+        self.array[index] = value
+
+
     def clear(self):
         self.array *= 0
 
