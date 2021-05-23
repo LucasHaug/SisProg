@@ -4,5 +4,6 @@ __pycache__/
 # Environments
 venv/
 
-# Contect file
+# Load and dump files
 image.txt
+dump.txt
