@@ -30,7 +30,7 @@ def main():
             line_reading_motor.run()
             mem_storing_motor.run()
 
-        np.savetxt("image.txt", memory, fmt='%x')
+        np.savetxt("image.txt", memory, fmt='%02X')
     except KeyboardInterrupt:
         print("[INFO] Ending Program")
 
