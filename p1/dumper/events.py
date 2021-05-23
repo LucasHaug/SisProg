@@ -1,5 +1,16 @@
 from ..event import Event
 
+class MemReadingEvent(Event):
+    """
+    Event type handled by the MemReadingMotor
+    """
+
+    def __init__(self, event_type) -> None:
+        super().__init__()
+
+        self.type = event_type
+
+
 class LineWritingEvent(Event):
     """
     Event type handled by the FileWritingMotor
