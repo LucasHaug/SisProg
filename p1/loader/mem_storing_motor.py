@@ -55,7 +55,7 @@ class MemStoringMotor(EventsMotor):
 
 
     def categorize_event(self, event: LineReadingEvent) -> str:
-        if event.line_number == 0:
+        if event.first_line:
             if event.line_size != ADDRESS_SIZE:
                 return "invalid_line"
 
@@ -97,7 +97,7 @@ class MemStoringMotor(EventsMotor):
                     self.memory_position += 1
                 else:
                     # Send ivalid line event
-                    next_event = LineReadingEvent(-1, [], MAX_BYTES + 1)
+                    next_event = LineReadingEvent(False, [], MAX_BYTES + 1)
 
                     self.add_event(next_event)
             else:

@@ -49,7 +49,9 @@ class LineReadingMotor(EventsMotor):
 
 
     def _read_line(self, event : DataReadingEvent) -> None:
-        next_event = LineReadingEvent(self.line_count, self.read_data, self.data_count)
+        first_line = True if self.line_count == 0 else False
+
+        next_event = LineReadingEvent(first_line, self.read_data, self.data_count)
 
         self.line_count += 1
         self.data_count = 0
@@ -59,6 +61,6 @@ class LineReadingMotor(EventsMotor):
 
     def _file_end(self, event : DataReadingEvent) -> None:
         # Add end line event
-        next_event = LineReadingEvent(-1, [], 0)
+        next_event = LineReadingEvent(False, [], 0)
 
         self.mem_storing_motor.add_event(next_event)

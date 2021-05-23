@@ -10,6 +10,7 @@ class FileReadingEvent(Event):
 
         self.type = event_type
 
+
 class DataReadingEvent(Event):
     """
     Event type handled by the LineReadingMotor
@@ -26,9 +27,9 @@ class LineReadingEvent(Event):
     Event type handled by the MemStoringMotor
     """
 
-    def __init__(self, line_number, line_data, line_size) -> None:
+    def __init__(self, first_line, line_data, line_size) -> None:
         super().__init__()
 
-        self.line_number = line_number
+        self.first_line = first_line
         self.line_data = line_data
         self.line_size = line_size
