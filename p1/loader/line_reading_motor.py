@@ -65,3 +65,5 @@ class LineReadingMotor(EventsMotor):
         next_event = LineReadingEvent(False, [], 0)
 
         self.mem_storing_motor.add_event(next_event)
+
+        self.deactivate()

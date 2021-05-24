@@ -119,6 +119,8 @@ class MemStoringMotor(EventsMotor):
 
         self.file_reading_motor.add_event(next_event)
 
+        self.deactivate()
+
 
     def _invalid_line(self, event: LineReadingEvent):
         print("[ERROR] Make sure to follow the input file specification")
@@ -126,6 +128,8 @@ class MemStoringMotor(EventsMotor):
         next_event = FileReadingEvent("close_file")
 
         self.file_reading_motor.add_event(next_event)
+
+        self.deactivate()
 
 
     def _decode(self, data, data_size):
