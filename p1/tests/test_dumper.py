@@ -10,6 +10,7 @@ def main():
     dumper = Dumper()
 
     # Note: image.txt must have just integers
+    memory = np.loadtxt("image.txt", dtype=np.uint8)
 
     try:
         dumper.run("dump.txt", memory, 0x010, 0x037)
