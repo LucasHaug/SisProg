@@ -1,6 +1,6 @@
 import tkinter as tk
 
-NUM_OF_ROWS = 6
+NUM_OF_ROWS = 8
 NUM_OF_COLUMNS = 4
 
 BASE_CHOICES = ["Decimal", "Binário", "Hexadecimal"]
