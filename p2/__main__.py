@@ -1,5 +1,5 @@
-from calculator.calculator import Calculator
-from calculator_gui import CalculatorGUI
+from .calculator.calculator import Calculator
+from .calculator_gui import CalculatorGUI
 
 def main():
     calculator = Calculator()
