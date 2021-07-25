@@ -147,14 +147,6 @@ class CalculatorGUI:
 
         self.expression.set(self.get_output())
 
-        if self.base_var.get() == BASE_CHOICES[2]:
-            for widget in self.tk_gui.winfo_children():
-                widget.config(state="normal")
-        else:
-            for widget in self.tk_gui.winfo_children():
-                if widget['text'] in ['A', 'B', 'C', 'D', 'E', 'F']:
-                    widget.config(state="disabled")
-
 
     def _resize(self, event) -> None:
         for widget in self.tk_gui.winfo_children():
