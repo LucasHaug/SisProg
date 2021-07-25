@@ -1,29 +1,4 @@
 {
-    "doxdocgen.generic.dateFormat": "MM/YYYY",
-
-    "doxdocgen.file.copyrightTag": [
-        "@copyright MIT License - Copyright (c) {year}"
-    ],
-
-    "doxdocgen.generic.authorName": "Lucas Haug",
-    "doxdocgen.generic.authorEmail": "lucas.haug@usp.br",
-
-    "doxdocgen.generic.authorTag": "@author {author} <{email}>",
-
-    "doxdocgen.file.fileOrder": [
-        "file",
-        "empty",
-        "author",
-        "empty",
-        "brief",
-        "empty",
-        "date",
-        "empty",
-        "copyright",
-        "empty",
-        "custom"
-    ],
-
     "editor.formatOnSave": true,
     "python.formatting.provider": "black",
 }
