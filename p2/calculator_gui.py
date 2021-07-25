@@ -1,9 +1,11 @@
 import tkinter as tk
 
+from .common import BASE_CHOICES
+
+
 NUM_OF_ROWS = 8
 NUM_OF_COLUMNS = 4
 
-BASE_CHOICES = ["Decimal", "Binário", "Hexadecimal"]
 
 class CalculatorGUI:
     def __init__(self, set_input, get_output) -> None:
