@@ -1,13 +1,17 @@
+from .interface_motor import InterfaceMotor
+
+from .events import DataReadingEvent
+
 class Calculator:
     def __init__(self) -> None:
-        pass
+        self.interface_motor = InterfaceMotor()
 
 
     def set_input(self, input_str: str) -> None:
-        self.input_str = input_str
+        self.interface_motor.add_event(DataReadingEvent(input_str))
+
+        self.interface_motor.run()
 
 
     def get_output(self) -> str:
-        self.output_str = self.input_str
-
-        return self.output_str
+        return self.interface_motor.get_output()
