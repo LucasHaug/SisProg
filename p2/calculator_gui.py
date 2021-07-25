@@ -79,12 +79,14 @@ class CalculatorGUI:
 
         # Create buttons
         calc_buttons_config = {
-            "+" : {"text":  "+", "row": numpad_first_row + 0, "column": numpad_first_col + 3, "fg": fg_color, "bg": "#f1a33c"},
-            "-" : {"text":  "-", "row": numpad_first_row + 1, "column": numpad_first_col + 3, "fg": fg_color, "bg": "#f1a33c"},
-            "*" : {"text":  "*", "row": numpad_first_row + 2, "column": numpad_first_col + 3, "fg": fg_color, "bg": "#f1a33c"},
-            "/" : {"text":  "/", "row": numpad_first_row + 3, "column": numpad_first_col + 3, "fg": fg_color, "bg": "#f1a33c"},
+            "+" : {"text":  "+", "row": numpad_first_row + 1, "column": numpad_first_col + 3, "fg": fg_color, "bg": "#f1a33c"},
+            "-" : {"text":  "-", "row": numpad_first_row + 2, "column": numpad_first_col + 3, "fg": fg_color, "bg": "#f1a33c"},
+            "*" : {"text":  "*", "row": numpad_first_row + 3, "column": numpad_first_col + 3, "fg": fg_color, "bg": "#f1a33c"},
+            "/" : {"text":  "/", "row": numpad_first_row + 4, "column": numpad_first_col + 3, "fg": fg_color, "bg": "#f1a33c"},
+            "=" : {"text":  "=", "row": numpad_first_row + 5, "column": numpad_first_col + 3, "fg": fg_color, "bg": "#f1a33c"},
             "Cl": {"text": "Cl", "row": numpad_first_row + 0, "column": numpad_first_col + 0, "fg": fg_color, "bg": "#555556"},
-            "=" : {"text":  "=", "row": numpad_first_row + 0, "column": numpad_first_col + 2, "fg": fg_color, "bg": "#f1a33c"},
+            "(" : {"text":  "(", "row": numpad_first_row + 0, "column": numpad_first_col + 2, "fg": fg_color, "bg": "#555556"},
+            ")" : {"text":  ")", "row": numpad_first_row + 0, "column": numpad_first_col + 3, "fg": fg_color, "bg": "#555556"},
             "0" : {"text":  "0", "row": numpad_first_row + 0, "column": numpad_first_col + 1, "fg": fg_color, "bg": "#717172"},
             "1" : {"text":  "1", "row": numpad_first_row + 1, "column": numpad_first_col + 0, "fg": fg_color, "bg": "#717172"},
             "2" : {"text":  "2", "row": numpad_first_row + 1, "column": numpad_first_col + 1, "fg": fg_color, "bg": "#717172"},
