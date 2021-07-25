@@ -1,3 +1,3 @@
 # Common constants
 
-BASE_CHOICES = ["Decimal", "Binário", "Hexadecimal"]
+BASE_CHOICES = ["Decimal", "Binário", "Octal", "Hexadecimal"]
