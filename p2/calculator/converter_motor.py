@@ -168,7 +168,7 @@ class ConverterMotor(EventsMotor):
 
         if number == 0:
             result = "0"
-        else:
+        elif number > 0:
             while number > 0:
                 try:
                     result = base_dict[number % base] + result
@@ -176,6 +176,8 @@ class ConverterMotor(EventsMotor):
                     raise ValueError("Malformed expression")
 
                 number //= base
+        else:
+            raise ValueError("Malformed expression")
 
         return result
 

@@ -112,3 +112,15 @@ def test_invalid_convertions_from_base_10():
     with pytest.raises(Exception):
         converter_motor._convert_from_base_10(1.1, BASE_CHOICES[3])
 
+    with pytest.raises(Exception):
+        converter_motor._convert_from_base_10(-1, BASE_CHOICES[0])
+
+    with pytest.raises(Exception):
+        converter_motor._convert_from_base_10(-1, BASE_CHOICES[1])
+
+    with pytest.raises(Exception):
+        converter_motor._convert_from_base_10(-1, BASE_CHOICES[2])
+
+    with pytest.raises(Exception):
+        converter_motor._convert_from_base_10(-1, BASE_CHOICES[3])
+
