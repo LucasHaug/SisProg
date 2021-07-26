@@ -38,3 +38,23 @@ class ExpressionEvent(Event):
         self.expression = expression
         self.base = base
         self.start_type = start_type
+
+
+class OperationElementEvent(Event):
+    """
+    Event type handled by the EvaluationMotor
+
+    Attributes
+    ----------
+    element : str or int
+        Operation element to be evaluated
+    element_type : str
+        Type of the operation element, may be
+        "number", "operator" or "finish"
+    """
+
+    def __init__(self, element, element_type) -> None:
+        super().__init__()
+
+        self.element = element
+        self.element_type = element_type
