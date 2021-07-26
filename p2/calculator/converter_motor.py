@@ -130,7 +130,7 @@ class ConverterMotor(EventsMotor):
             base = 2
         elif base_name == BASE_CHOICES[1]:
             base = 8
-        elif base_name == BASE_CHOICES[2]:
+        elif base_name == BASE_CHOICES[3]:
             base = 16
         else:
             base = 10
@@ -175,7 +175,7 @@ class ConverterMotor(EventsMotor):
             base = 2
         elif base_name == BASE_CHOICES[1]:
             base = 8
-        elif base_name == BASE_CHOICES[2]:
+        elif base_name == BASE_CHOICES[3]:
             base = 16
         else:
             base = 10

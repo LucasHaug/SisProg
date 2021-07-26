@@ -34,7 +34,7 @@ class CalculatorGUI:
 
         # Create base selector
         self.base_var = tk.StringVar()
-        self.base_var.set(BASE_CHOICES[0])
+        self.base_var.set(BASE_CHOICES[2])
 
         base_menu = tk.OptionMenu(
             self.tk_gui,

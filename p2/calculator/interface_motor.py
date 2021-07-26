@@ -14,7 +14,7 @@ class InterfaceMotor(EventsMotor):
         self.reactions_table["operation_element"] = self._store_operation_element
 
         self.output = ""
-        self.current_base = BASE_CHOICES[0]
+        self.current_base = BASE_CHOICES[2]
 
 
     def get_output(self) -> str:
