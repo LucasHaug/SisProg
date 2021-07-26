@@ -6,7 +6,7 @@ from .events import ExpressionEvent
 from ..common import BASE_CHOICES
 
 
-class ConverterMotor(EventsMotor):
+class ConversionMotor(EventsMotor):
     def __init__(self) -> None:
         super().__init__()
 
@@ -59,10 +59,8 @@ class ConverterMotor(EventsMotor):
     def get_converted_output(self) -> str:
         return self.converted_output
 
-
-    def set_evaluator_motor(self, evaluator_motor) -> None:
-        self.evaluator_motor = evaluator_motor
-
+    def set_evaluation_motor(self, evaluation_motor) -> None:
+        self.evaluation_motor = evaluation_motor
 
     def activate(self) -> None:
         super().activate()
@@ -229,14 +227,15 @@ class ConverterMotor(EventsMotor):
         else:
             return 10
 
-
-    def _get_base_dict(self, converter_dict: OrderedDict, base_name: str) -> OrderedDict:
+    def _get_base_dict(
+        self, conversion_dict: OrderedDict, base_name: str
+    ) -> OrderedDict:
         """
         Get the base dictionary.
 
         Arguments
         ---------
-        converter_dict : OrderedDict
+        conversion_dict : OrderedDict
             Base dictionary to get from the base dictionary
 
         base_name : str
@@ -250,6 +249,6 @@ class ConverterMotor(EventsMotor):
 
         base = self._get_base_number_in_base_10(base_name)
 
-        base_dict = self._slice_odict(converter_dict, 0, base)
+        base_dict = self._slice_odict(conversion_dict, 0, base)
 
         return base_dict

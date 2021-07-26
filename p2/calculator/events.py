@@ -19,7 +19,7 @@ class DataReadingEvent(Event):
 
 class ExpressionEvent(Event):
     """
-    Event type handled by the ConverterMotor
+    Event type handled by the ConversionMotor
 
     Attributes
     ----------
@@ -32,7 +32,7 @@ class ExpressionEvent(Event):
         "number", "operator", "empty" or None if not known
     """
 
-    def __init__(self, expression, base, start_type = None) -> None:
+    def __init__(self, expression, base, start_type=None) -> None:
         super().__init__()
 
         self.expression = expression
