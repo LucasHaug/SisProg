@@ -148,6 +148,56 @@ class ConverterMotor(EventsMotor):
         return result
 
 
+    def _convert_from_base_10(self, number: int, base_name: str) -> str:
+        """
+        Convert a number from base 10 to the base specified.
+
+        Uses the self.to_base_10 dictionary to convert each
+        digit of the number.
+
+        Arguments
+        ---------
+        number : int
+            Number to convert
+        base_name : str
+            Name of the base of the number to be converted, the
+            options are listed in the BASE_CHOICES constant
+
+        Returns
+        -------
+        int
+            Number converted to the specified base
+        """
+
+        base = 0
+
+        if base_name == "Binário":
+            base = 2
+        elif base_name == "Octal":
+            base = 8
+        elif base_name == "Hexadecimal":
+            base = 16
+        else:
+            base = 10
+
+        base_dict = self._slice_odict(self.from_base_10, 0, base)
+
+        result = ""
+
+        if number == 0:
+            result = "0"
+        else:
+            while number > 0:
+                try:
+                    result = base_dict[number % base] + result
+                except KeyError:
+                    raise ValueError("Malformed expression")
+
+                number //= base
+
+        return result
+
+
     def _slice_odict(self, odict: OrderedDict, start: int, stop: int) -> OrderedDict:
         """
         Slice an OrderedDict.
