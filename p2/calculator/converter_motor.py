@@ -126,11 +126,11 @@ class ConverterMotor(EventsMotor):
 
         base = 0
 
-        if base_name == "Binário":
+        if base_name == BASE_CHOICES[0]:
             base = 2
-        elif base_name == "Octal":
+        elif base_name == BASE_CHOICES[1]:
             base = 8
-        elif base_name == "Hexadecimal":
+        elif base_name == BASE_CHOICES[2]:
             base = 16
         else:
             base = 10
@@ -171,11 +171,11 @@ class ConverterMotor(EventsMotor):
 
         base = 0
 
-        if base_name == "Binário":
+        if base_name == BASE_CHOICES[0]:
             base = 2
-        elif base_name == "Octal":
+        elif base_name == BASE_CHOICES[1]:
             base = 8
-        elif base_name == "Hexadecimal":
+        elif base_name == BASE_CHOICES[2]:
             base = 16
         else:
             base = 10
