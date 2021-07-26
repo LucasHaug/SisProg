@@ -124,18 +124,9 @@ class ConverterMotor(EventsMotor):
             Number converted to base 10
         """
 
-        base = 0
+        base = self._get_base_number_in_base_10(base_name)
 
-        if base_name == BASE_CHOICES[0]:
-            base = 2
-        elif base_name == BASE_CHOICES[1]:
-            base = 8
-        elif base_name == BASE_CHOICES[3]:
-            base = 16
-        else:
-            base = 10
-
-        base_dict = self._slice_odict(self.to_base_10, 0, base)
+        base_dict = self._get_base_dict(self.to_base_10, base_name)
 
         result = 0
 
@@ -169,18 +160,9 @@ class ConverterMotor(EventsMotor):
             Number converted to the specified base
         """
 
-        base = 0
+        base = self._get_base_number_in_base_10(base_name)
 
-        if base_name == BASE_CHOICES[0]:
-            base = 2
-        elif base_name == BASE_CHOICES[1]:
-            base = 8
-        elif base_name == BASE_CHOICES[3]:
-            base = 16
-        else:
-            base = 10
-
-        base_dict = self._slice_odict(self.from_base_10, 0, base)
+        base_dict = self._get_base_dict(self.from_base_10, base_name)
 
         result = ""
 
@@ -218,3 +200,54 @@ class ConverterMotor(EventsMotor):
         """
 
         return OrderedDict(list(odict.items())[start:stop])
+
+
+    def _get_base_number_in_base_10(self, base_name: str) -> int:
+        """
+        Get the number in base 10.
+
+        Arguments
+        ---------
+        base_name : str
+            Name of the base of the number to be converted, the
+            options are listed in the BASE_CHOICES constant
+
+        Returns
+        -------
+        int
+            Number converted to base 10
+        """
+
+        if base_name == BASE_CHOICES[0]:
+            return 2
+        elif base_name == BASE_CHOICES[1]:
+            return 8
+        elif base_name == BASE_CHOICES[3]:
+            return 16
+        else:
+            return 10
+
+
+    def _get_base_dict(self, converter_dict: OrderedDict, base_name: str) -> OrderedDict:
+        """
+        Get the base dictionary.
+
+        Arguments
+        ---------
+        converter_dict : OrderedDict
+            Base dictionary to get from the base dictionary
+
+        base_name : str
+            Name of the base to get
+
+        Returns
+        -------
+        OrderedDict
+            Dictionary of the base
+        """
+
+        base = self._get_base_number_in_base_10(base_name)
+
+        base_dict = self._slice_odict(converter_dict, 0, base)
+
+        return base_dict
