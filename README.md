@@ -18,6 +18,13 @@ Para rodar a P2 faça:
 python3 -m p2
 ```
 
+Para fazer o logging da P2, faça:
+
+
+```bash
+python3 -m p2 -v
+```
+
 Por fim, para rodar os testes unitários, instale o `pytest` e então rode o seguinte comando estando na raiz do repositório:
 
 ```bash
