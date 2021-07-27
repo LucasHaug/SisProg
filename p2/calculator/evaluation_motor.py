@@ -138,7 +138,7 @@ class EvaluationMotor(EventsMotor):
         if operator == "*":
             return first_value * second_value
         elif operator == "/":
-            return first_value / second_value
+            return first_value // second_value
         elif operator == "+":
             return first_value + second_value
         elif operator == "-":
