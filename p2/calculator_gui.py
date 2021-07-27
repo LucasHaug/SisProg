@@ -3,7 +3,7 @@ import tkinter as tk
 from .common import BASE_CHOICES
 
 
-NUM_OF_ROWS = 8
+NUM_OF_ROWS = 9
 NUM_OF_COLUMNS = 4
 
 
@@ -79,30 +79,31 @@ class CalculatorGUI:
 
         # Create buttons
         calc_buttons_config = {
-            "+" : {"text":  "+", "row": numpad_first_row + 1, "column": numpad_first_col + 3, "fg": fg_color, "bg": "#f1a33c"},
-            "-" : {"text":  "-", "row": numpad_first_row + 2, "column": numpad_first_col + 3, "fg": fg_color, "bg": "#f1a33c"},
-            "*" : {"text":  "*", "row": numpad_first_row + 3, "column": numpad_first_col + 3, "fg": fg_color, "bg": "#f1a33c"},
-            "/" : {"text":  "/", "row": numpad_first_row + 4, "column": numpad_first_col + 3, "fg": fg_color, "bg": "#f1a33c"},
-            "=" : {"text":  "=", "row": numpad_first_row + 5, "column": numpad_first_col + 3, "fg": fg_color, "bg": "#f1a33c"},
-            "Cl": {"text": "Cl", "row": numpad_first_row + 0, "column": numpad_first_col + 0, "fg": fg_color, "bg": "#555556"},
-            "(" : {"text":  "(", "row": numpad_first_row + 0, "column": numpad_first_col + 2, "fg": fg_color, "bg": "#555556"},
-            ")" : {"text":  ")", "row": numpad_first_row + 0, "column": numpad_first_col + 3, "fg": fg_color, "bg": "#555556"},
-            "0" : {"text":  "0", "row": numpad_first_row + 0, "column": numpad_first_col + 1, "fg": fg_color, "bg": "#717172"},
-            "1" : {"text":  "1", "row": numpad_first_row + 1, "column": numpad_first_col + 0, "fg": fg_color, "bg": "#717172"},
-            "2" : {"text":  "2", "row": numpad_first_row + 1, "column": numpad_first_col + 1, "fg": fg_color, "bg": "#717172"},
-            "3" : {"text":  "3", "row": numpad_first_row + 1, "column": numpad_first_col + 2, "fg": fg_color, "bg": "#717172"},
-            "4" : {"text":  "4", "row": numpad_first_row + 2, "column": numpad_first_col + 0, "fg": fg_color, "bg": "#717172"},
-            "5" : {"text":  "5", "row": numpad_first_row + 2, "column": numpad_first_col + 1, "fg": fg_color, "bg": "#717172"},
-            "6" : {"text":  "6", "row": numpad_first_row + 2, "column": numpad_first_col + 2, "fg": fg_color, "bg": "#717172"},
-            "7" : {"text":  "7", "row": numpad_first_row + 3, "column": numpad_first_col + 0, "fg": fg_color, "bg": "#717172"},
-            "8" : {"text":  "8", "row": numpad_first_row + 3, "column": numpad_first_col + 1, "fg": fg_color, "bg": "#717172"},
-            "9" : {"text":  "9", "row": numpad_first_row + 3, "column": numpad_first_col + 2, "fg": fg_color, "bg": "#717172"},
-            "A" : {"text":  "A", "row": numpad_first_row + 4, "column": numpad_first_col + 0, "fg": fg_color, "bg": "#717172"},
-            "B" : {"text":  "B", "row": numpad_first_row + 4, "column": numpad_first_col + 1, "fg": fg_color, "bg": "#717172"},
-            "C" : {"text":  "C", "row": numpad_first_row + 4, "column": numpad_first_col + 2, "fg": fg_color, "bg": "#717172"},
-            "D" : {"text":  "D", "row": numpad_first_row + 5, "column": numpad_first_col + 0, "fg": fg_color, "bg": "#717172"},
-            "E" : {"text":  "E", "row": numpad_first_row + 5, "column": numpad_first_col + 1, "fg": fg_color, "bg": "#717172"},
-            "F" : {"text":  "F", "row": numpad_first_row + 5, "column": numpad_first_col + 2, "fg": fg_color, "bg": "#717172"},
+            "+"  : {"text":  "+", "row": numpad_first_row + 1, "column": numpad_first_col + 3, "fg": fg_color, "bg": "#f1a33c"},
+            "-"  : {"text":  "-", "row": numpad_first_row + 2, "column": numpad_first_col + 3, "fg": fg_color, "bg": "#f1a33c"},
+            "*"  : {"text":  "*", "row": numpad_first_row + 3, "column": numpad_first_col + 3, "fg": fg_color, "bg": "#f1a33c"},
+            "/"  : {"text":  "/", "row": numpad_first_row + 4, "column": numpad_first_col + 3, "fg": fg_color, "bg": "#f1a33c"},
+            "="  : {"text":  "=", "row": numpad_first_row + 5, "column": numpad_first_col + 3, "fg": fg_color, "bg": "#f1a33c"},
+            "Cl" : {"text": "Cl", "row": numpad_first_row + 0, "column": numpad_first_col + 0, "fg": fg_color, "bg": "#555556"},
+            "⌫"  : {"text":  "⌫", "row": numpad_first_row + 0, "column": numpad_first_col + 1, "fg": fg_color, "bg": "#555556"},
+            "("  : {"text":  "(", "row": numpad_first_row + 0, "column": numpad_first_col + 2, "fg": fg_color, "bg": "#555556"},
+            ")"  : {"text":  ")", "row": numpad_first_row + 0, "column": numpad_first_col + 3, "fg": fg_color, "bg": "#555556"},
+            "F"  : {"text":  "F", "row": numpad_first_row + 1, "column": numpad_first_col + 2, "fg": fg_color, "bg": "#717172"},
+            "E"  : {"text":  "E", "row": numpad_first_row + 1, "column": numpad_first_col + 1, "fg": fg_color, "bg": "#717172"},
+            "D"  : {"text":  "D", "row": numpad_first_row + 1, "column": numpad_first_col + 0, "fg": fg_color, "bg": "#717172"},
+            "C"  : {"text":  "C", "row": numpad_first_row + 2, "column": numpad_first_col + 2, "fg": fg_color, "bg": "#717172"},
+            "B"  : {"text":  "B", "row": numpad_first_row + 2, "column": numpad_first_col + 1, "fg": fg_color, "bg": "#717172"},
+            "A"  : {"text":  "A", "row": numpad_first_row + 2, "column": numpad_first_col + 0, "fg": fg_color, "bg": "#717172"},
+            "9"  : {"text":  "9", "row": numpad_first_row + 3, "column": numpad_first_col + 2, "fg": fg_color, "bg": "#717172"},
+            "8"  : {"text":  "8", "row": numpad_first_row + 3, "column": numpad_first_col + 1, "fg": fg_color, "bg": "#717172"},
+            "7"  : {"text":  "7", "row": numpad_first_row + 3, "column": numpad_first_col + 0, "fg": fg_color, "bg": "#717172"},
+            "6"  : {"text":  "6", "row": numpad_first_row + 4, "column": numpad_first_col + 2, "fg": fg_color, "bg": "#717172"},
+            "5"  : {"text":  "5", "row": numpad_first_row + 4, "column": numpad_first_col + 1, "fg": fg_color, "bg": "#717172"},
+            "4"  : {"text":  "4", "row": numpad_first_row + 4, "column": numpad_first_col + 0, "fg": fg_color, "bg": "#717172"},
+            "3"  : {"text":  "3", "row": numpad_first_row + 5, "column": numpad_first_col + 2, "fg": fg_color, "bg": "#717172"},
+            "2"  : {"text":  "2", "row": numpad_first_row + 5, "column": numpad_first_col + 1, "fg": fg_color, "bg": "#717172"},
+            "1"  : {"text":  "1", "row": numpad_first_row + 5, "column": numpad_first_col + 0, "fg": fg_color, "bg": "#717172"},
+            "0"  : {"text":  "0", "row": numpad_first_row + 6, "column": numpad_first_col + 1, "fg": fg_color, "bg": "#717172"},
         }
 
         button_height = 1
@@ -133,8 +134,8 @@ class CalculatorGUI:
         self.tk_gui.destroy()
 
 
-    def _button_callback(self, char: str) -> None:
-        self.set_input(char)
+    def _button_callback(self, button: str) -> None:
+        self.set_input(button)
 
         self.expression.set(self.get_output())
 

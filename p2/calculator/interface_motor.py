@@ -12,6 +12,7 @@ class InterfaceMotor(EventsMotor):
         super().__init__()
 
         self.reactions_table["clear"] = self._clear_output
+        self.reactions_table["backspace"] = self._backspace
         self.reactions_table["equal"] = self._calculate_result
         self.reactions_table["change_base"] = self._change_base
         self.reactions_table["operation_element"] = self._store_operation_element
@@ -30,6 +31,8 @@ class InterfaceMotor(EventsMotor):
     def categorize_event(self, event: DataReadingEvent) -> str:
         if event.data == "Cl":
             return "clear"
+        if event.data == "⌫":
+            return "backspace"
         elif event.data == "=":
             return "equal"
         elif event.data in BASE_CHOICES:
@@ -39,6 +42,9 @@ class InterfaceMotor(EventsMotor):
 
     def _clear_output(self, event: DataReadingEvent) -> None:
         self.output = ""
+
+    def _backspace(self, event: DataReadingEvent) -> None:
+        self.output = self.output[:-1]
 
     def _calculate_result(self, event: DataReadingEvent) -> None:
         self.evaluation_motor.activate()
