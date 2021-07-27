@@ -10,7 +10,10 @@ class Calculator:
     def set_input(self, input_str: str) -> None:
         self.interface_motor.add_event(DataReadingEvent(input_str))
 
-        self.interface_motor.run()
+        has_pending_event = self.interface_motor.run()
+
+        while has_pending_event:
+            has_pending_event = self.interface_motor.run()
 
 
     def get_output(self) -> str:

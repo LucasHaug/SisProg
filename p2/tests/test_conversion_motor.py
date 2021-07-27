@@ -28,7 +28,7 @@ def test_sum_expression():
             evaluation_motor.is_active() or conversion_motor.is_active()
         )
 
-    assert conversion_motor.get_converted_output() == "10"
+    assert conversion_motor.get_converted_output(BASE_CHOICES[2]) == "10"
 
 
 def test_subtraction_expression():
@@ -52,7 +52,7 @@ def test_subtraction_expression():
             evaluation_motor.is_active() or conversion_motor.is_active()
         )
 
-    assert conversion_motor.get_converted_output() == "7CF"
+    assert conversion_motor.get_converted_output(BASE_CHOICES[3]) == "7CF"
 
 
 def test_multiplication_expression():
@@ -76,7 +76,7 @@ def test_multiplication_expression():
             evaluation_motor.is_active() or conversion_motor.is_active()
         )
 
-    assert conversion_motor.get_converted_output() == "100000"
+    assert conversion_motor.get_converted_output(BASE_CHOICES[0]) == "100000"
 
 
 def test_division_expression():
@@ -100,7 +100,7 @@ def test_division_expression():
             evaluation_motor.is_active() or conversion_motor.is_active()
         )
 
-    assert conversion_motor.get_converted_output() == "303"
+    assert conversion_motor.get_converted_output(BASE_CHOICES[1]) == "303"
 
 
 def test_braces_expression():
@@ -124,4 +124,4 @@ def test_braces_expression():
             evaluation_motor.is_active() or conversion_motor.is_active()
         )
 
-    assert conversion_motor.get_converted_output() == "232"
+    assert conversion_motor.get_converted_output(BASE_CHOICES[2]) == "232"

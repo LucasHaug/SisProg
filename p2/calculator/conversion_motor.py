@@ -59,10 +59,10 @@ class ConversionMotor(EventsMotor):
             15: "F",
         }
 
-    def get_converted_output(self) -> str:
+    def get_converted_output(self, base) -> str:
         result = self.evaluation_motor.get_result()
 
-        converted_output = self._convert_from_base_10(result, self.current_base)
+        converted_output = self._convert_from_base_10(result, base)
 
         return converted_output
 

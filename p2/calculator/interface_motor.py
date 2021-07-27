@@ -20,6 +20,8 @@ class InterfaceMotor(EventsMotor):
         self.output = ""
         self.current_base = BASE_CHOICES[2]
 
+        self.got_result = False
+
         self.conversion_motor = ConversionMotor()
         self.evaluation_motor = EvaluationMotor()
 
@@ -43,8 +45,12 @@ class InterfaceMotor(EventsMotor):
     def _clear_output(self, event: DataReadingEvent) -> None:
         self.output = ""
 
+        self.got_result = False
+
     def _backspace(self, event: DataReadingEvent) -> None:
         self.output = self.output[:-1]
+
+        self.got_result = False
 
     def _calculate_result(self, event: DataReadingEvent) -> None:
         self.evaluation_motor.activate()
@@ -62,10 +68,17 @@ class InterfaceMotor(EventsMotor):
                 self.evaluation_motor.is_active() or self.conversion_motor.is_active()
             )
 
-        self.output = self.conversion_motor.get_converted_output()
+        self.output = self.conversion_motor.get_converted_output(self.current_base)
+
+        self.got_result = True
 
     def _change_base(self, event: DataReadingEvent) -> None:
         self.current_base = event.data
 
+        if self.got_result:
+            self.output = self.conversion_motor.get_converted_output(self.current_base)
+
     def _store_operation_element(self, event: DataReadingEvent) -> None:
         self.output += event.data
+
+        self.got_result = False
