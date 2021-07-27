@@ -102,6 +102,18 @@ def test_valid_convertions_from_base_10():
     assert conversion_motor._convert_from_base_10(486485, BASE_CHOICES[3]) == "76C55"
 
 
+def test_negative_convertions_from_base_10():
+    conversion_motor = ConversionMotor()
+
+    assert conversion_motor._convert_from_base_10(-15, BASE_CHOICES[0]) == "-1111"
+
+    assert conversion_motor._convert_from_base_10(-15, BASE_CHOICES[1]) == "-17"
+
+    assert conversion_motor._convert_from_base_10(-15, BASE_CHOICES[2]) == "-15"
+
+    assert conversion_motor._convert_from_base_10(-15, BASE_CHOICES[3]) == "-F"
+
+
 def test_invalid_convertions_from_base_10():
     conversion_motor = ConversionMotor()
 
@@ -117,14 +129,3 @@ def test_invalid_convertions_from_base_10():
     with pytest.raises(Exception):
         conversion_motor._convert_from_base_10(1.1, BASE_CHOICES[3])
 
-    with pytest.raises(Exception):
-        conversion_motor._convert_from_base_10(-1, BASE_CHOICES[0])
-
-    with pytest.raises(Exception):
-        conversion_motor._convert_from_base_10(-1, BASE_CHOICES[1])
-
-    with pytest.raises(Exception):
-        conversion_motor._convert_from_base_10(-1, BASE_CHOICES[2])
-
-    with pytest.raises(Exception):
-        conversion_motor._convert_from_base_10(-1, BASE_CHOICES[3])
