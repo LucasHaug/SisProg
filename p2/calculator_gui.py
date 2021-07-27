@@ -129,31 +129,25 @@ class CalculatorGUI:
             # Add exception callback
             self.tk_gui.report_callback_exception = self.show_error
 
-
     def start(self) -> None:
         self.tk_gui.mainloop()
 
-
     def stop(self) -> None:
         self.tk_gui.destroy()
-
 
     def _button_callback(self, button: str) -> None:
         self.set_input(button)
 
         self.expression.set(self.get_output())
 
-
     def _base_callback(self, *args) -> None:
         self.set_input(self.base_var.get())
 
         self.expression.set(self.get_output())
 
-
     def _resize(self, event) -> None:
         for widget in self.tk_gui.winfo_children():
             widget.config(font=("TkDefaultFont", event.width // 40, "bold"))
-
 
     def show_error(self, exc_type, exc_value, exc_traceback) -> None:
         messagebox.showerror('Error', exc_value)
