@@ -15,7 +15,7 @@ def test_sum_input():
     for element, element_type in zip(elements, elements_types):
         evaluation_motor.add_event(OperationElementEvent(element, element_type))
 
-    evaluation_motor.add_event(OperationElementEvent("", "finish"))
+    evaluation_motor.add_event(OperationElementEvent("", "empty"))
 
     while evaluation_motor.is_active():
         evaluation_motor.run()
@@ -34,7 +34,7 @@ def test_subtraction_input():
     for element, element_type in zip(elements, elements_types):
         evaluation_motor.add_event(OperationElementEvent(element, element_type))
 
-    evaluation_motor.add_event(OperationElementEvent("", "finish"))
+    evaluation_motor.add_event(OperationElementEvent("", "empty"))
 
     while evaluation_motor.is_active():
         evaluation_motor.run()
@@ -53,7 +53,7 @@ def test_sign_input():
     for element, element_type in zip(elements, elements_types):
         evaluation_motor.add_event(OperationElementEvent(element, element_type))
 
-    evaluation_motor.add_event(OperationElementEvent("", "finish"))
+    evaluation_motor.add_event(OperationElementEvent("", "empty"))
 
     while evaluation_motor.is_active():
         evaluation_motor.run()
@@ -72,7 +72,62 @@ def test_multi_plus_input():
     for element, element_type in zip(elements, elements_types):
         evaluation_motor.add_event(OperationElementEvent(element, element_type))
 
-    evaluation_motor.add_event(OperationElementEvent("", "finish"))
+    evaluation_motor.add_event(OperationElementEvent("", "empty"))
+
+    while evaluation_motor.is_active():
+        evaluation_motor.run()
+
+    assert evaluation_motor.get_result() == 41
+
+
+def test_multi_minus_input():
+    evaluation_motor = EvaluationMotor()
+
+    evaluation_motor.activate()
+
+    elements = [18, "-", 2, "-", "-", "-", 25]
+    elements_types = [
+        "number",
+        "operator",
+        "number",
+        "operator",
+        "operator",
+        "operator",
+        "number",
+    ]
+
+    for element, element_type in zip(elements, elements_types):
+        evaluation_motor.add_event(OperationElementEvent(element, element_type))
+
+    evaluation_motor.add_event(OperationElementEvent("", "empty"))
+
+    while evaluation_motor.is_active():
+        evaluation_motor.run()
+
+    assert evaluation_motor.get_result() == 41
+
+
+def test_braces_sign_input():
+    evaluation_motor = EvaluationMotor()
+
+    evaluation_motor.activate()
+
+    elements = [18, "-", 2, "-", "(", "-", 25, ")"]
+    elements_types = [
+        "number",
+        "operator",
+        "number",
+        "operator",
+        "operator",
+        "operator",
+        "number",
+        "operator",
+    ]
+
+    for element, element_type in zip(elements, elements_types):
+        evaluation_motor.add_event(OperationElementEvent(element, element_type))
+
+    evaluation_motor.add_event(OperationElementEvent("", "empty"))
 
     while evaluation_motor.is_active():
         evaluation_motor.run()
@@ -99,7 +154,7 @@ def test_multiplication_input():
     for element, element_type in zip(elements, elements_types):
         evaluation_motor.add_event(OperationElementEvent(element, element_type))
 
-    evaluation_motor.add_event(OperationElementEvent("", "finish"))
+    evaluation_motor.add_event(OperationElementEvent("", "empty"))
 
     while evaluation_motor.is_active():
         evaluation_motor.run()
@@ -126,7 +181,7 @@ def test_division_input():
     for element, element_type in zip(elements, elements_types):
         evaluation_motor.add_event(OperationElementEvent(element, element_type))
 
-    evaluation_motor.add_event(OperationElementEvent("", "finish"))
+    evaluation_motor.add_event(OperationElementEvent("", "empty"))
 
     while evaluation_motor.is_active():
         evaluation_motor.run()
@@ -153,8 +208,38 @@ def test_invalid_input():
     for element, element_type in zip(elements, elements_types):
         evaluation_motor.add_event(OperationElementEvent(element, element_type))
 
-    evaluation_motor.add_event(OperationElementEvent("", "finish"))
+    evaluation_motor.add_event(OperationElementEvent("", "empty"))
 
     with pytest.raises(Exception):
         while evaluation_motor.is_active():
             evaluation_motor.run()
+
+
+def test_full_braces():
+    evaluation_motor = EvaluationMotor()
+
+    evaluation_motor.activate()
+
+    elements = ["-", 58, "-", 2, "*", "(", 30, "-", 25, ")"]
+    elements_types = [
+        "operator",
+        "number",
+        "operator",
+        "number",
+        "operator",
+        "operator",
+        "number",
+        "operator",
+        "number",
+        "operator",
+    ]
+
+    for element, element_type in zip(elements, elements_types):
+        evaluation_motor.add_event(OperationElementEvent(element, element_type))
+
+    evaluation_motor.add_event(OperationElementEvent("", "empty"))
+
+    while evaluation_motor.is_active():
+        evaluation_motor.run()
+
+    assert evaluation_motor.get_result() == -68
