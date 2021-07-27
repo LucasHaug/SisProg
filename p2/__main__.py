@@ -5,9 +5,9 @@ from .calculator.calculator import Calculator
 from .calculator_gui import CalculatorGUI
 
 def main():
-    parser = argparse.ArgumentParser(description='SisProg P2')
+    parser = argparse.ArgumentParser(description='Calculadora Multibase Para Inteiros')
 
-    parser.add_argument('-v', '--verbose', action='store_true', help='Verbose output (optional)')
+    parser.add_argument('-v', '--verbose', action='store_true', help='Verbose (opcional)')
 
     args = parser.parse_args()
 
