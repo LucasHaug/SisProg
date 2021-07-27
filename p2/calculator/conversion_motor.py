@@ -1,7 +1,7 @@
 from collections import OrderedDict
 
 from ..events_motor import EventsMotor
-from .events import ExpressionEvent
+from .events import ExpressionEvent, OperationElementEvent
 
 from ..common import BASE_CHOICES
 
@@ -13,51 +13,58 @@ class ConversionMotor(EventsMotor):
         self.reactions_table["detect_expression"] = self._detect_expression
         self.reactions_table["read_number"] = self._read_number
         self.reactions_table["read_operator"] = self._read_operator
-        self.reactions_table["get_result"] = self._get_result
+        self.reactions_table["finish_calculation"] = self._finish_calculation
 
-        self.converted_output = ""
+        self.current_base = BASE_CHOICES[0]
 
-        self.to_base_10 = OrderedDict({
-            "0" : 0,
-            "1" : 1,
-            "2" : 2,
-            "3" : 3,
-            "4" : 4,
-            "5" : 5,
-            "6" : 6,
-            "7" : 7,
-            "8" : 8,
-            "9" : 9,
-            "A" : 10,
-            "B" : 11,
-            "C" : 12,
-            "D" : 13,
-            "E" : 14,
-            "F" : 15,
-        })
+        self.operators = ["+", "-", "*", "/", "(", ")"]
+
+        self.to_base_10 = OrderedDict(
+            {
+                "0": 0,
+                "1": 1,
+                "2": 2,
+                "3": 3,
+                "4": 4,
+                "5": 5,
+                "6": 6,
+                "7": 7,
+                "8": 8,
+                "9": 9,
+                "A": 10,
+                "B": 11,
+                "C": 12,
+                "D": 13,
+                "E": 14,
+                "F": 15,
+            }
+        )
 
         self.from_base_10 = {
-            0  : "0",
-            1  : "1",
-            2  : "2",
-            3  : "3",
-            4  : "4",
-            5  : "5",
-            6  : "6",
-            7  : "7",
-            8  : "8",
-            9  : "9",
-            10 : "A",
-            11 : "B",
-            12 : "C",
-            13 : "D",
-            14 : "E",
-            15 : "F"
+            0: "0",
+            1: "1",
+            2: "2",
+            3: "3",
+            4: "4",
+            5: "5",
+            6: "6",
+            7: "7",
+            8: "8",
+            9: "9",
+            10: "A",
+            11: "B",
+            12: "C",
+            13: "D",
+            14: "E",
+            15: "F",
         }
 
-
     def get_converted_output(self) -> str:
-        return self.converted_output
+        result = self.evaluation_motor.get_result()
+
+        converted_output = self._convert_from_base_10(result, self.current_base)
+
+        return converted_output
 
     def set_evaluation_motor(self, evaluation_motor) -> None:
         self.evaluation_motor = evaluation_motor
@@ -67,39 +74,73 @@ class ConversionMotor(EventsMotor):
 
         self.converted_output = ""
 
-
-    def deactivate(self) -> None:
-        super().deactivate()
-
-        self.converted_output = ""
-
-
     def categorize_event(self, event: ExpressionEvent) -> str:
         if event.start_type == "number":
             return "read_number"
         elif event.start_type == "operator":
             return "read_operator"
         elif event.start_type == "empty":
-            return "get_result"
+            return "finish_calculation"
         else:
             return "detect_expression"
 
-
     def _detect_expression(self, event: ExpressionEvent) -> None:
-        pass
+        self.current_base = event.base
 
+        if len(event.expression) == 0:
+            next_event = ExpressionEvent("", event.base, "empty")
+
+            self.add_event(next_event)
+
+            return
+
+        base_dict = self._get_base_dict(self.to_base_10, event.base)
+
+        if event.expression[0] in self.operators:
+            next_event = ExpressionEvent(event.expression, event.base, "operator")
+
+            self.add_event(next_event)
+        elif event.expression[0] in base_dict:
+            next_event = ExpressionEvent(event.expression, event.base, "number")
+
+            self.add_event(next_event)
+        else:
+            raise ValueError("Malformed expression")
 
     def _read_number(self, event: ExpressionEvent) -> None:
-        pass
+        base_dict = self._get_base_dict(self.to_base_10, event.base)
 
+        number_str = ""
+
+        while len(event.expression) > 0 and event.expression[0] in base_dict:
+            number_str += event.expression[0]
+            event.expression = event.expression[1:]
+
+        number = self._convert_to_base_10(number_str, event.base)
+
+        eval_next_event = OperationElementEvent(number, "number")
+
+        self.evaluation_motor.add_event(eval_next_event)
+
+        exp_next_event = ExpressionEvent(event.expression, event.base, None)
+
+        self.add_event(exp_next_event)
 
     def _read_operator(self, event: ExpressionEvent) -> None:
-        pass
+        eval_next_event = OperationElementEvent(event.expression[0], "operator")
 
+        self.evaluation_motor.add_event(eval_next_event)
 
-    def _get_result(self, event: ExpressionEvent) -> None:
-        pass
+        exp_next_event = ExpressionEvent(event.expression[1:], event.base, None)
 
+        self.add_event(exp_next_event)
+
+    def _finish_calculation(self, event: ExpressionEvent) -> None:
+        next_event = OperationElementEvent("", "empty")
+
+        self.evaluation_motor.add_event(next_event)
+
+        self.deactivate()
 
     def _convert_to_base_10(self, number: str, base_name: str) -> int:
         """
@@ -135,7 +176,6 @@ class ConversionMotor(EventsMotor):
                 raise ValueError("Malformed expression")
 
         return result
-
 
     def _convert_from_base_10(self, number: int, base_name: str) -> str:
         """
@@ -179,7 +219,6 @@ class ConversionMotor(EventsMotor):
 
         return result
 
-
     def _slice_odict(self, odict: OrderedDict, start: int, stop: int) -> OrderedDict:
         """
         Slice an OrderedDict.
@@ -200,7 +239,6 @@ class ConversionMotor(EventsMotor):
         """
 
         return OrderedDict(list(odict.items())[start:stop])
-
 
     def _get_base_number_in_base_10(self, base_name: str) -> int:
         """
