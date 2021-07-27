@@ -1,5 +1,7 @@
 # Logic based on https://www.geeksforgeeks.org/expression-evaluation/
 
+import logging
+
 from ..events_motor import EventsMotor
 from .events import OperationElementEvent
 
@@ -148,6 +150,9 @@ class EvaluationMotor(EventsMotor):
             raise Exception("Invalid operator")
 
     def _calc_from_stack(self):
+        logging.debug(f"Operation stack: {self.operations_stack}")
+        logging.debug(f"Values stack: {self.values_stack}")
+
         try:
             second_value = self.values_stack.pop()
 
@@ -161,6 +166,8 @@ class EvaluationMotor(EventsMotor):
             self.values_stack.append(
                 self._apply_operation(first_value, second_value, operation)
             )
+
+            logging.debug(f"{first_value} {operation} {second_value} = {self.values_stack[-1]}")
 
         except IndexError:
             raise Exception("Invalid expression")

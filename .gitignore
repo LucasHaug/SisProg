@@ -7,3 +7,6 @@ venv/
 # Load and dump files
 image.txt
 dump.txt
+
+# Logging files
+*.log

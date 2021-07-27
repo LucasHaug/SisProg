@@ -1,3 +1,4 @@
+import logging
 from collections import OrderedDict
 
 from ..events_motor import EventsMotor
@@ -175,6 +176,8 @@ class ConversionMotor(EventsMotor):
             except KeyError:
                 raise ValueError("Malformed expression")
 
+        logging.debug(f"Converted {number} from {base_name} to base 10: {result}")
+
         return result
 
     def _convert_from_base_10(self, number: int, base_name: str) -> str:
@@ -223,6 +226,8 @@ class ConversionMotor(EventsMotor):
                 number //= base
 
         result = sign + result
+
+        logging.debug(f"Converted {number} from base 10 to {base_name}: {result}")
 
         return result
 
