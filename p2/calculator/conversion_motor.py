@@ -202,11 +202,18 @@ class ConversionMotor(EventsMotor):
 
         base_dict = self._get_base_dict(self.from_base_10, base_name)
 
+        if number < 0:
+            sign = "-"
+        else:
+            sign = ""
+
+        number = abs(number)
+
         result = ""
 
         if number == 0:
             result = "0"
-        elif number > 0:
+        else:
             while number > 0:
                 try:
                     result = base_dict[number % base] + result
@@ -214,8 +221,8 @@ class ConversionMotor(EventsMotor):
                     raise ValueError("Malformed expression")
 
                 number //= base
-        else:
-            raise ValueError("Malformed expression")
+
+        result = sign + result
 
         return result
 
