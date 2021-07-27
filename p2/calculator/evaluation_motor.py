@@ -107,12 +107,13 @@ class EvaluationMotor(EventsMotor):
         self.last_event = event
 
     def _sign(self, event: OperationElementEvent) -> None:
-        if self.last_event.element_type == None:
+        if self.last_event.element_type is None:
             self.values_stack.append(0)
             self.operations_stack.append(event.element)
-        elif self.last_event.element_type == "-":
+        elif self.last_event.element == "-":
             self.operations_stack.pop()
             self.operations_stack.append("+")
+            event.element = "+"
         else:
             self.change_sign = True
 

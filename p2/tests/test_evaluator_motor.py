@@ -104,7 +104,7 @@ def test_multi_minus_input():
     while evaluation_motor.is_active():
         evaluation_motor.run()
 
-    assert evaluation_motor.get_result() == 41
+    assert evaluation_motor.get_result() == -9
 
 
 def test_braces_sign_input():
