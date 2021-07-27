@@ -1,4 +1,5 @@
 import tkinter as tk
+from tkinter import messagebox
 
 from .common import BASE_CHOICES
 
@@ -125,6 +126,9 @@ class CalculatorGUI:
 
             button.grid(row=button_config["row"], column=button_config["column"], sticky="NSEW")
 
+            # Add exception callback
+            self.tk_gui.report_callback_exception = self.show_error
+
 
     def start(self) -> None:
         self.tk_gui.mainloop()
@@ -149,3 +153,7 @@ class CalculatorGUI:
     def _resize(self, event) -> None:
         for widget in self.tk_gui.winfo_children():
             widget.config(font=("TkDefaultFont", event.width // 40, "bold"))
+
+
+    def show_error(self, exc_type, exc_value, exc_traceback) -> None:
+        messagebox.showerror('Error', exc_value)
