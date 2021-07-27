@@ -17,3 +17,9 @@ Para rodar a P2 faça:
 ```bash
 python3 -m p2
 ```
+
+Por fim, para rodar os testes unitários, instale o `pytest` e então rode o seguinte comando estando na raiz do repositório:
+
+```bash
+python3 -m pytest
+```
