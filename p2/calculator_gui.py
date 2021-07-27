@@ -124,9 +124,6 @@ class CalculatorGUI:
 
             button.grid(row=button_config["row"], column=button_config["column"], sticky="NSEW")
 
-            if button_name in ['A', 'B', 'C', 'D', 'E', 'F']:
-                button.config(state="disabled")
-
 
     def start(self) -> None:
         self.tk_gui.mainloop()
