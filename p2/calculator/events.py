@@ -50,7 +50,7 @@ class OperationElementEvent(Event):
         Operation element to be evaluated
     element_type : str
         Type of the operation element, may be
-        "number", "operator" or "finish"
+        "number", "operator", "empty" or None if not known
     """
 
     def __init__(self, element, element_type) -> None:
