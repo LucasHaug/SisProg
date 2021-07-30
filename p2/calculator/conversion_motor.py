@@ -11,7 +11,7 @@ class ConversionMotor(EventsMotor):
     def __init__(self) -> None:
         super().__init__()
 
-        self.reactions_table["detect_expression"] = self._detect_expression
+        self.reactions_table["interpret_expression"] = self._interpret_expression
         self.reactions_table["read_number"] = self._read_number
         self.reactions_table["read_operator"] = self._read_operator
         self.reactions_table["finish_calculation"] = self._finish_calculation
@@ -83,9 +83,9 @@ class ConversionMotor(EventsMotor):
         elif event.start_type == "empty":
             return "finish_calculation"
         else:
-            return "detect_expression"
+            return "interpret_expression"
 
-    def _detect_expression(self, event: ExpressionEvent) -> None:
+    def _interpret_expression(self, event: ExpressionEvent) -> None:
         self.current_base = event.base
 
         if len(event.expression) == 0:
